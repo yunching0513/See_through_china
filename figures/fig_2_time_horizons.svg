@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" role="img" aria-labelledby="title desc">
+  <title id="title">三段時間下的壓力轉換</title>
+  <desc id="desc">比較中國與臺灣在急性、過渡和結構期的宏觀壓力與防禦性韌性重點。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#7B8794"/></marker>
+    <style>
+      .title{font:700 34px 'PingFang TC','Noto Sans CJK TC',sans-serif;fill:#1F2937}
+      .subtitle{font:400 18px 'PingFang TC','Noto Sans CJK TC',sans-serif;fill:#5B6472}
+      .stage{font:700 26px 'PingFang TC','Noto Sans CJK TC',sans-serif;fill:#23313F}
+      .time{font:600 18px 'PingFang TC','Noto Sans CJK TC',sans-serif;fill:#5B6472}
+      .row{font:700 22px 'PingFang TC','Noto Sans CJK TC',sans-serif;fill:#23313F}
+      .body{font:400 17px 'PingFang TC','Noto Sans CJK TC',sans-serif;fill:#374151}
+      .small{font:400 15px 'PingFang TC','Noto Sans CJK TC',sans-serif;fill:#596573}
+    </style>
+  </defs>
+  <rect width="1400" height="900" fill="#FAFAF7"/>
+  <text x="70" y="60" class="title">三段時間下的壓力轉換</text>
+  <text x="70" y="94" class="subtitle">時間增加時，壓力由即時服務與市場反應，轉向補充／維修，最後成為制度與產業調適。</text>
+
+  <rect x="210" y="135" width="350" height="115" rx="18" fill="#E8EDF2"/>
+  <rect x="575" y="135" width="350" height="115" rx="18" fill="#F5F0E8"/>
+  <rect x="940" y="135" width="350" height="115" rx="18" fill="#E8F2EE"/>
+  <text x="385" y="178" text-anchor="middle" class="stage">急性期</text>
+  <text x="385" y="214" text-anchor="middle" class="time">0–30 日</text>
+  <text x="750" y="178" text-anchor="middle" class="stage">過渡期</text>
+  <text x="750" y="214" text-anchor="middle" class="time">1–6 個月</text>
+  <text x="1115" y="178" text-anchor="middle" class="stage">結構期</text>
+  <text x="1115" y="214" text-anchor="middle" class="time">6 個月以上</text>
+  <path d="M560 192 L570 192" stroke="#7B8794" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M925 192 L935 192" stroke="#7B8794" stroke-width="4" marker-end="url(#arrow)"/>
+
+  <rect x="70" y="285" width="125" height="220" rx="18" fill="#F7E8E6"/>
+  <text x="132" y="350" text-anchor="middle" class="row">中國</text>
+  <text x="132" y="383" text-anchor="middle" class="small">宏觀壓力</text>
+  <rect x="210" y="285" width="350" height="220" rx="18" fill="#FFF" stroke="#E4E7EB"/>
+  <rect x="575" y="285" width="350" height="220" rx="18" fill="#FFF" stroke="#E4E7EB"/>
+  <rect x="940" y="285" width="350" height="220" rx="18" fill="#FFF" stroke="#E4E7EB"/>
+  <text x="235" y="325" class="body"><tspan x="235" dy="0">• 市場、保險與運價波動</tspan><tspan x="235" dy="34">• 部分進口延遲</tspan><tspan x="235" dy="34">• 外資與訂單避險</tspan><tspan x="235" dy="44" class="small">國內產能與行政調度</tspan><tspan x="235" dy="26" class="small">吸收部分短期衝擊</tspan></text>
+  <text x="600" y="325" class="body"><tspan x="600" dy="0">• 海運能源成本累積</tspan><tspan x="600" dy="34">• 油籽／飼料與投入品</tspan><tspan x="600" dy="34">• 出口需求、企業融資</tspan><tspan x="600" dy="34">• 地方財政壓力放大</tspan></text>
+  <text x="965" y="325" class="body"><tspan x="965" dy="0">• 出口型成長模式</tspan><tspan x="965" dy="34">• 科技替代與生產率</tspan><tspan x="965" dy="34">• 房地產／地方債</tspan><tspan x="965" dy="34">• 能源與飼料長期成本</tspan></text>
+
+  <rect x="70" y="535" width="125" height="250" rx="18" fill="#E4F1ED"/>
+  <text x="132" y="610" text-anchor="middle" class="row">臺灣</text>
+  <text x="132" y="643" text-anchor="middle" class="small">韌性重點</text>
+  <rect x="210" y="535" width="350" height="250" rx="18" fill="#FFF" stroke="#E4E7EB"/>
+  <rect x="575" y="535" width="350" height="250" rx="18" fill="#FFF" stroke="#E4E7EB"/>
+  <rect x="940" y="535" width="350" height="250" rx="18" fill="#FFF" stroke="#E4E7EB"/>
+  <text x="235" y="575" class="body"><tspan x="235" dy="0">• 基本服務最低水準</tspan><tspan x="235" dy="34">• 通訊／供電快速切換</tspan><tspan x="235" dy="34">• 醫療、供水、配送</tspan><tspan x="235" dy="34">• 支付與可信資訊</tspan><tspan x="235" dy="42" class="small">目標：避免連鎖失效</tspan></text>
+  <text x="600" y="575" class="body"><tspan x="600" dy="0">• 替代供應契約</tspan><tspan x="600" dy="34">• 維修隊與預置零件</tspan><tspan x="600" dy="34">• 分散電源與配售</tspan><tspan x="600" dy="34">• 弱勢保障、伙伴介面</tspan><tspan x="600" dy="42" class="small">目標：能補充、能修復</tspan></text>
+  <text x="965" y="575" class="body"><tspan x="965" dy="0">• 能源與投入多元化</tspan><tspan x="965" dy="34">• 糧食／飼料調適</tspan><tspan x="965" dy="34">• 地方治理與財政</tspan><tspan x="965" dy="34">• 產業、就業、照護延續</tspan><tspan x="965" dy="42" class="small">目標：改變運作方式</tspan></text>
+
+  <rect x="70" y="822" width="1220" height="43" rx="12" fill="#FFFFFF" stroke="#D7DEE5"/>
+  <text x="94" y="850" class="small">注意：時間框架描述系統壓力的主導機制，不是崩潰倒數；實際結果取決於替代、庫存、修復、治理與外部支援。</text>
+</svg>

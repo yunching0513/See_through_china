@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" role="img" aria-labelledby="title desc">
+  <title id="title">烏克蘭經驗轉譯為臺灣韌性投資</title>
+  <desc id="desc">由烏克蘭服務持續經驗，轉譯至臺灣島嶼情境的五條防禦性政策鏈。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#7B8794"/></marker>
+    <style>
+      .title{font:700 34px 'PingFang TC','Noto Sans CJK TC',sans-serif;fill:#1F2937}
+      .subtitle{font:400 18px 'PingFang TC','Noto Sans CJK TC',sans-serif;fill:#5B6472}
+      .head{font:700 24px 'PingFang TC','Noto Sans CJK TC',sans-serif;fill:#23313F}
+      .label{font:700 19px 'PingFang TC','Noto Sans CJK TC',sans-serif;fill:#23313F}
+      .body{font:400 16px 'PingFang TC','Noto Sans CJK TC',sans-serif;fill:#45515F}
+      .foot{font:400 15px 'PingFang TC','Noto Sans CJK TC',sans-serif;fill:#596573}
+    </style>
+  </defs>
+  <rect width="1400" height="900" fill="#FAFAF7"/>
+  <text x="70" y="62" class="title">烏克蘭經驗如何安全轉譯為臺灣韌性投資</text>
+  <text x="70" y="96" class="subtitle">轉譯的是服務持續、修復與治理機制，不是戰場操作；島嶼補給差異另行納入。</text>
+
+  <rect x="70" y="140" width="420" height="72" rx="18" fill="#E8EDF2"/>
+  <text x="280" y="185" text-anchor="middle" class="head">烏克蘭觀察</text>
+  <rect x="910" y="140" width="420" height="72" rx="18" fill="#E8F2EE"/>
+  <text x="1120" y="185" text-anchor="middle" class="head">臺灣設計原則</text>
+  <rect x="565" y="140" width="270" height="72" rx="18" fill="#F5F0E8"/>
+  <text x="700" y="185" text-anchor="middle" class="head">轉譯判準</text>
+
+  <g>
+    <rect x="70" y="245" width="420" height="95" rx="16" fill="#FFF" stroke="#D6DEE5"/>
+    <text x="95" y="279" class="label">異質通訊與流量重路由</text>
+    <text x="95" y="310" class="body">光纖、行動、無線與衛星各自承擔不同失效模式</text>
+    <rect x="565" y="255" width="270" height="75" rx="14" fill="#FFF8EC"/>
+    <text x="700" y="284" text-anchor="middle" class="label">可切換、可供電、可維修</text>
+    <text x="700" y="312" text-anchor="middle" class="body">不綁定單一服務商</text>
+    <rect x="910" y="245" width="420" height="95" rx="16" fill="#FFF" stroke="#CFE0DA"/>
+    <text x="935" y="279" class="label">多層通訊＋公共服務優先級</text>
+    <text x="935" y="310" class="body">以切換時間與最低可用容量驗證</text>
+    <path d="M490 292 L558 292" stroke="#7B8794" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M835 292 L903 292" stroke="#7B8794" stroke-width="3" marker-end="url(#arrow)"/>
+  </g>
+
+  <g>
+    <rect x="70" y="365" width="420" height="95" rx="16" fill="#FFF" stroke="#D6DEE5"/>
+    <text x="95" y="399" class="label">分散能源降低整體停擺</text>
+    <text x="95" y="430" class="body">小型電源、太陽能與備用燃料支撐局部服務</text>
+    <rect x="565" y="375" width="270" height="75" rx="14" fill="#FFF8EC"/>
+    <text x="700" y="404" text-anchor="middle" class="label">服務負載先於設備清單</text>
+    <text x="700" y="432" text-anchor="middle" class="body">燃料與操作人員成套</text>
+    <rect x="910" y="365" width="420" height="95" rx="16" fill="#FFF" stroke="#CFE0DA"/>
+    <text x="935" y="399" class="label">醫療／供水／通訊的局部供電</text>
+    <text x="935" y="430" class="body">用服務覆蓋率與持續時間評估</text>
+    <path d="M490 412 L558 412" stroke="#7B8794" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M835 412 L903 412" stroke="#7B8794" stroke-width="3" marker-end="url(#arrow)"/>
+  </g>
+
+  <g>
+    <rect x="70" y="485" width="420" height="95" rx="16" fill="#FFF" stroke="#D6DEE5"/>
+    <text x="95" y="519" class="label">修復隊、零件與臨時部署</text>
+    <text x="95" y="550" class="body">網路存活取決於現地搶修，不只取決於硬化</text>
+    <rect x="565" y="495" width="270" height="75" rx="14" fill="#FFF8EC"/>
+    <text x="700" y="524" text-anchor="middle" class="label">修復時間是核心指標</text>
+    <text x="700" y="552" text-anchor="middle" class="body">跨業者共享能力</text>
+    <rect x="910" y="485" width="420" height="95" rx="16" fill="#FFF" stroke="#CFE0DA"/>
+    <text x="935" y="519" class="label">機動維修、通用零件、共同演練</text>
+    <text x="935" y="550" class="body">追蹤修復中位時間與備件可用率</text>
+    <path d="M490 532 L558 532" stroke="#7B8794" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M835 532 L903 532" stroke="#7B8794" stroke-width="3" marker-end="url(#arrow)"/>
+  </g>
+
+  <g>
+    <rect x="70" y="605" width="420" height="95" rx="16" fill="#FFF" stroke="#D6DEE5"/>
+    <text x="95" y="639" class="label">地方授權維持基本服務</text>
+    <text x="95" y="670" class="body">地方政府能依情況調整能源、醫療與配送</text>
+    <rect x="565" y="615" width="270" height="75" rx="14" fill="#FFF8EC"/>
+    <text x="700" y="644" text-anchor="middle" class="label">中央定標、地方執行</text>
+    <text x="700" y="672" text-anchor="middle" class="body">權限與資源一起下放</text>
+    <rect x="910" y="605" width="420" height="95" rx="16" fill="#FFF" stroke="#CFE0DA"/>
+    <text x="935" y="639" class="label">地方最低服務標準與財政授權</text>
+    <text x="935" y="670" class="body">縮短等待逐案核准的時間</text>
+    <path d="M490 652 L558 652" stroke="#7B8794" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M835 652 L903 652" stroke="#7B8794" stroke-width="3" marker-end="url(#arrow)"/>
+  </g>
+
+  <g>
+    <rect x="70" y="725" width="420" height="95" rx="16" fill="#FFF" stroke="#D6DEE5"/>
+    <text x="95" y="759" class="label">外援受政治、產能與運輸延遲</text>
+    <text x="95" y="790" class="body">有支援不等於立即可用或規格相容</text>
+    <rect x="565" y="735" width="270" height="75" rx="14" fill="#FFF8EC"/>
+    <text x="700" y="764" text-anchor="middle" class="label">把延遲當作基準條件</text>
+    <text x="700" y="792" text-anchor="middle" class="body">島嶼補給另加風險折扣</text>
+    <rect x="910" y="725" width="420" height="95" rx="16" fill="#FFF" stroke="#CFE0DA"/>
+    <text x="935" y="759" class="label">危機前完成契約、標準與訓練</text>
+    <text x="935" y="790" class="body">預置可互通的物資、介面與程序</text>
+    <path d="M490 772 L558 772" stroke="#7B8794" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M835 772 L903 772" stroke="#7B8794" stroke-width="3" marker-end="url(#arrow)"/>
+  </g>
+
+  <text x="70" y="864" class="foot">來源框架：ITU（2022）、World Bank／烏克蘭政府／歐盟／聯合國 RDNA4（2025）、NATO–Ukraine 韌性工作坊（2026）。</text>
+</svg>
