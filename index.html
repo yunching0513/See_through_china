@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="以公開資料呈現中國大陸省級經濟功能、供應鏈關聯與臺海韌性脈絡的非作戰化互動圖鑑。">
+  <meta name="theme-color" content="#172640">
+  <title>See Through China｜省級經濟與供應鏈互動圖鑑</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynbfkFZQYyEqfC9DMCZQdFH1jiFA=" crossorigin="">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳至主要內容</a>
+  <div class="use-boundary">
+    <span class="boundary-signal" aria-hidden="true"></span>
+    公開資料 · 非作戰化研究 · 不含設施座標、部隊部署或目標資訊
+  </div>
+
+  <header class="masthead">
+    <a class="brand" href="#top" aria-label="See Through China 首頁">
+      <span class="brand-mark">STC</span>
+      <span class="brand-name">See Through China</span>
+    </a>
+    <nav aria-label="主要導覽">
+      <a href="#atlas">省級圖鑑</a>
+      <a href="#resilience">韌性比較</a>
+      <a href="#context">沿海脈絡</a>
+      <a href="#method">方法</a>
+    </nav>
+    <a class="repo-link" href="https://github.com/yunching0513/See_through_china" target="_blank" rel="noreferrer">GitHub ↗</a>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <p class="kicker"><span>公開資料圖鑑</span><span>2026.08.13</span></p>
+        <h1>SEE<br>THROUGH<br><em>CHINA</em></h1>
+        <p class="hero-zh">穿透表象，看見省級經濟功能與供應鏈關聯</p>
+        <p class="hero-intro">把 31 個省級行政區的代表產業、公共功能、上游投入與下游連結放進同一個可探索介面。這是一份支援政策、民防與關鍵服務持續運作的研究工具，不是目標清單。</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#atlas">開啟互動圖鑑</a>
+          <a class="button button-quiet" href="report/台海衝突_戰略依賴與國家韌性_研究底稿_v1.md">閱讀研究底稿</a>
+        </div>
+      </div>
+      <dl class="hero-metrics" aria-label="資料摘要">
+        <div><dt>31</dt><dd>省級行政區</dd></div>
+        <div><dt>14</dt><dd>產業角色類型</dd></div>
+        <div><dt>4</dt><dd>統計區域</dd></div>
+        <div><dt>7</dt><dd>韌性比較領域</dd></div>
+      </dl>
+      <p class="scroll-cue" aria-hidden="true">SCROLL TO READ <span></span></p>
+    </section>
+
+    <section class="atlas-section" id="atlas">
+      <div class="section-heading">
+        <div>
+          <p class="section-index">01 / PROVINCIAL ATLAS</p>
+          <h2>省級經濟與供應鏈圖鑑</h2>
+        </div>
+        <p>搜尋或篩選省份，點選地圖標記查看其公共功能、代表產業與供應鏈關係。標記是行政區代表點，不是設施位置。</p>
+      </div>
+
+      <div class="atlas-shell">
+        <aside class="filter-rail" aria-label="地圖篩選器">
+          <div class="filter-block search-block">
+            <label for="province-search">搜尋</label>
+            <div class="search-wrap">
+              <input id="province-search" type="search" placeholder="省份、產品或功能…" autocomplete="off">
+              <kbd>/</kbd>
+            </div>
+          </div>
+
+          <div class="filter-block">
+            <div class="filter-title"><span>統計區域</span><button id="reset-filters" type="button">重設</button></div>
+            <div class="chip-grid" id="region-filters">
+              <button class="filter-chip active" type="button" data-region="全部" aria-pressed="true">全部</button>
+              <button class="filter-chip" type="button" data-region="東部" aria-pressed="false">東部</button>
+              <button class="filter-chip" type="button" data-region="中部" aria-pressed="false">中部</button>
+              <button class="filter-chip" type="button" data-region="西部" aria-pressed="false">西部</button>
+              <button class="filter-chip" type="button" data-region="東北" aria-pressed="false">東北</button>
+            </div>
+          </div>
+
+          <div class="filter-block role-block">
+            <div class="filter-title"><span>產業角色</span><span class="result-count" id="result-count">31 / 31</span></div>
+            <div id="role-filters" class="role-filters"></div>
+          </div>
+
+          <div class="rail-note">
+            <span aria-hidden="true">i</span>
+            經濟與軍事資訊刻意分層呈現，避免形成可操作的設施—部署疊圖。
+          </div>
+        </aside>
+
+        <div class="map-stage">
+          <div id="atlas-map" role="application" aria-label="中國大陸省級經濟功能互動地圖"></div>
+          <div class="map-fallback" id="map-fallback" hidden>
+            <img src="figures/osm_china_base.png" alt="OpenStreetMap 中國區域底圖">
+            <p>互動地圖載入失敗。請確認網路連線，或使用下方省份清單。</p>
+          </div>
+          <div class="map-topline">
+            <span id="map-status">顯示全部省級行政區</span>
+            <button id="fit-map" type="button" aria-label="縮放至篩選結果">聚焦結果</button>
+          </div>
+          <div class="map-legend" id="map-legend" aria-label="地圖圖例"></div>
+          <p class="map-attribution">底圖 © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap contributors</a> · ODbL</p>
+        </div>
+
+        <aside class="province-panel" id="province-panel" aria-live="polite">
+          <div class="panel-empty" id="panel-empty">
+            <span class="panel-number">31</span>
+            <h3>選擇一個省級行政區</h3>
+            <p>地圖與篩選結果會帶你進入各省的經濟角色、代表產品與供應鏈關聯。</p>
+            <span class="panel-arrow" aria-hidden="true">←</span>
+          </div>
+          <article class="province-detail" id="province-detail" hidden>
+            <div class="detail-head">
+              <div>
+                <p id="detail-meta"></p>
+                <h3 id="detail-title"></h3>
+              </div>
+              <span id="detail-abbr" aria-hidden="true"></span>
+            </div>
+            <p class="detail-function" id="detail-function"></p>
+            <dl class="detail-list">
+              <div><dt>基礎設施類型</dt><dd id="detail-infra"></dd></div>
+              <div><dt>代表產品與產業群</dt><dd id="detail-products"></dd></div>
+              <div><dt>主要上游投入</dt><dd id="detail-upstream"></dd></div>
+              <div><dt>主要下游連結</dt><dd id="detail-downstream"></dd></div>
+            </dl>
+            <div class="detail-footer">
+              <span id="detail-confidence"></span>
+              <button id="compare-add" type="button">加入比較</button>
+            </div>
+          </article>
+        </aside>
+      </div>
+
+      <div class="province-directory">
+        <div class="directory-head">
+          <h3>省份索引</h3>
+          <p>也可從文字清單選取；最多加入三個省份比較。</p>
+        </div>
+        <div class="province-list" id="province-list"></div>
+      </div>
+
+      <section class="compare-drawer" id="compare-drawer" hidden aria-labelledby="compare-title">
+        <div class="compare-head">
+          <div><p>SELECTED PROVINCES</p><h3 id="compare-title">省級並列比較</h3></div>
+          <button id="clear-compare" type="button">清除全部</button>
+        </div>
+        <div class="compare-grid" id="compare-grid"></div>
+      </section>
+    </section>
+
+    <section class="resilience-section" id="resilience">
+      <div class="section-heading light-heading">
+        <div>
+          <p class="section-index">02 / RESILIENCE LENS</p>
+          <h2>臺灣與中國的系統韌性比較</h2>
+        </div>
+        <p>比較的是外部中斷、制裁、封鎖風險或市場衝擊下的系統壓力，不代表軍事目標價值。</p>
+      </div>
+
+      <div class="horizon-switch" role="group" aria-label="時間範圍">
+        <button type="button" class="active" data-horizon="acute_0_30d" aria-pressed="true"><span>短期</span>0–30 日</button>
+        <button type="button" data-horizon="intermediate_1_6m" aria-pressed="false"><span>中期</span>1–6 月</button>
+        <button type="button" data-horizon="long_over_6m" aria-pressed="false"><span>長期</span>6 月以上</button>
+      </div>
+
+      <div class="resilience-layout">
+        <div class="chart-card">
+          <div class="chart-legend"><span class="china-key">中國</span><span class="taiwan-key">臺灣</span><small>低 ← 系統壓力 → 極高</small></div>
+          <div id="resilience-chart" class="resilience-chart"></div>
+        </div>
+        <aside class="chart-insight" id="chart-insight">
+          <p class="insight-label">點選一個領域</p>
+          <h3>閱讀證據與限制</h3>
+          <p>圖表將質性級距轉成相對長度，方便比較，不是精確的風險機率或損害估計。</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="context-section" id="context">
+      <div class="section-heading">
+        <div>
+          <p class="section-index">03 / COASTAL CONTEXT</p>
+          <h2>沿海戰區級公開脈絡</h2>
+        </div>
+        <p>僅呈現宏觀責任方向與公開活動型態；不含部隊番號、基地、兵力、裝備、射程、戰備狀態或即時位置。</p>
+      </div>
+      <div class="context-warning">
+        <strong>分層原則</strong>
+        <span>此區不與省級產業地圖疊合，也不提供部署圖。</span>
+      </div>
+      <div class="context-layout">
+        <div class="theater-list" id="theater-list"></div>
+        <figure class="context-figure">
+          <img src="figures/fig_5_china_coastal_theater_context.svg" alt="中國沿海戰區層級宏觀責任方向圖，不是部隊部署圖">
+          <figcaption>戰區級責任方向示意；底圖 © OpenStreetMap contributors。</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="method-section" id="method">
+      <div class="method-title">
+        <p class="section-index">04 / METHOD & BOUNDARY</p>
+        <h2>這張圖能說什麼，<br>不能說什麼</h2>
+      </div>
+      <div class="method-grid">
+        <article>
+          <span>01</span>
+          <h3>分析尺度</h3>
+          <p>經濟資料以省級行政區彙整；地圖點位只是行政區代表點，不是工廠、港口、電廠或通訊節點。</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>資料解讀</h3>
+          <p>產品與供應鏈欄位呈現代表性集群和跨區連結。信心標籤反映公開來源的一致性，不代表完整盤點。</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>明確排除</h3>
+          <p>不提供精確設施、容量與瓶頸，不提供部隊部署、打擊排序、癱瘓方法或損害最佳化。</p>
+        </article>
+        <article>
+          <span>04</span>
+          <h3>研究目的</h3>
+          <p>支援公共政策、民防、供應鏈分散、風險溝通及能源、糧食、金融、物流與通訊的持續運作。</p>
+        </article>
+      </div>
+      <div class="download-row">
+        <a href="data/china_provincial_supply_chain_atlas.csv" download>下載省級資料 CSV <span>↓</span></a>
+        <a href="data/dependency_assessment.csv" download>下載韌性比較 CSV <span>↓</span></a>
+        <a href="research_notes/search_and_review_log.md">閱讀來源審查紀錄 <span>→</span></a>
+        <a href="RESPONSIBLE_USE.md">Responsible use <span>→</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-brand">SEE THROUGH<br>CHINA</div>
+    <p>公開資料、可重現研究、明確使用邊界。<br>資料檢索截止：2026-08-13（Asia/Taipei）</p>
+    <p class="footer-license">地圖 © OpenStreetMap contributors · ODbL<br>研究內容詳見 repository 文件。</p>
+  </footer>
+
+  <script src="assets/data.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
