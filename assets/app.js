@@ -15,6 +15,7 @@
   const provinceByName = new Map(data.provinces.map((province) => [province.province, province]));
   const state = { region: "全部", role: "全部", query: "", selected: null, comparison: [] };
   let map = null;
+  let mapResizeFrame = 0;
   const markers = new Map();
   const initialBounds = [[17.4, 73], [53.8, 134.8]];
 
@@ -32,7 +33,6 @@
     map = L.map("atlas-map", {
       zoomControl: true, minZoom: 3, maxZoom: 7, attributionControl: false, zoomSnap: .25
     });
-    map.fitBounds(initialBounds);
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 7, attribution: "&copy; OpenStreetMap contributors"
     }).addTo(map);
@@ -52,6 +52,26 @@
         .addTo(map);
       markers.set(province.province, marker);
     });
+
+    const syncMapSize = () => {
+      window.cancelAnimationFrame(mapResizeFrame);
+      mapResizeFrame = window.requestAnimationFrame(() => {
+        map.invalidateSize({ pan: false, debounceMoveend: true });
+      });
+    };
+    const fitInitialView = () => {
+      map.invalidateSize({ pan: false });
+      map.fitBounds(initialBounds, { animate: false, padding: [18, 18] });
+    };
+
+    if ("ResizeObserver" in window) {
+      const mapResizeObserver = new ResizeObserver(syncMapSize);
+      mapResizeObserver.observe($("#atlas-map"));
+    } else {
+      window.addEventListener("resize", syncMapSize, { passive: true });
+    }
+    window.requestAnimationFrame(() => window.requestAnimationFrame(fitInitialView));
+    document.fonts?.ready.then(fitInitialView);
   }
 
   function renderRoleFilters() {
