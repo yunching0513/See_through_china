@@ -6,6 +6,24 @@
   <meta name="description" content="以公開資料呈現中國大陸省級經濟功能、供應鏈關聯與臺海韌性脈絡的非作戰化互動圖鑑。">
   <meta name="theme-color" content="#172640">
   <title>See Through China｜省級經濟與供應鏈互動圖鑑</title>
+  <link rel="canonical" href="https://yunching0513.github.io/See_through_china/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="See Through China">
+  <meta property="og:locale" content="zh_TW">
+  <meta property="og:url" content="https://yunching0513.github.io/See_through_china/">
+  <meta property="og:title" content="See Through China｜省級經濟與供應鏈互動圖鑑">
+  <meta property="og:description" content="以公開資料呈現中國大陸省級經濟功能、供應鏈關聯與臺海韌性脈絡的非作戰化互動圖鑑。不含設施座標、部隊部署或目標資訊。">
+  <meta property="og:image" content="https://yunching0513.github.io/See_through_china/assets/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="See Through China：公開資料的省級經濟與供應鏈互動圖鑑">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="See Through China｜省級經濟與供應鏈互動圖鑑">
+  <meta name="twitter:description" content="以公開資料呈現中國大陸省級經濟功能、供應鏈關聯與臺海韌性脈絡的非作戰化互動圖鑑。">
+  <meta name="twitter:image" content="https://yunching0513.github.io/See_through_china/assets/og-image.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@600;700;900&display=swap" rel="stylesheet">
@@ -47,10 +65,10 @@
         </div>
       </div>
       <dl class="hero-metrics" aria-label="資料摘要">
-        <div><dt>31</dt><dd>省級行政區</dd></div>
-        <div><dt>14</dt><dd>產業角色類型</dd></div>
-        <div><dt>4</dt><dd>統計區域</dd></div>
-        <div><dt>7</dt><dd>韌性比較領域</dd></div>
+        <div><dt id="metric-provinces">31</dt><dd>省級行政區</dd></div>
+        <div><dt id="metric-roles">14</dt><dd>產業角色類型</dd></div>
+        <div><dt id="metric-regions">4</dt><dd>統計區域</dd></div>
+        <div><dt id="metric-domains">6</dt><dd>可比對韌性領域</dd></div>
       </dl>
       <p class="scroll-cue" aria-hidden="true">SCROLL TO READ <span></span></p>
     </section>
@@ -112,7 +130,7 @@
 
         <aside class="province-panel" id="province-panel" aria-live="polite">
           <div class="panel-empty" id="panel-empty">
-            <span class="panel-number">31</span>
+            <span class="panel-number" id="panel-count">31</span>
             <h3>選擇一個省級行政區</h3>
             <p>地圖與篩選結果會帶你進入各省的經濟角色、代表產品與供應鏈關聯。</p>
             <span class="panel-arrow" aria-hidden="true">←</span>
@@ -176,6 +194,7 @@
         <div class="chart-card">
           <div class="chart-legend"><span class="china-key">中國</span><span class="taiwan-key">臺灣</span><small>低 ← 系統壓力 → 極高</small></div>
           <div id="resilience-chart" class="resilience-chart"></div>
+          <p class="chart-note" id="chart-note" hidden></p>
         </div>
         <aside class="chart-insight" id="chart-insight">
           <p class="insight-label">點選一個領域</p>
@@ -245,11 +264,15 @@
   <footer>
     <div class="footer-brand">SEE THROUGH<br>CHINA</div>
     <p>公開資料、可重現研究、明確使用邊界。<br>資料檢索截止：2026-08-13（Asia/Taipei）</p>
-    <p class="footer-license">地圖 © OpenStreetMap contributors · ODbL<br>研究內容詳見 repository 文件。</p>
+    <p class="footer-license">
+      地圖 © OpenStreetMap contributors · ODbL<br>
+      研究內容與資料 <a href="LICENSE-CONTENT">CC BY 4.0</a>　程式碼 <a href="LICENSE">MIT</a>
+    </p>
   </footer>
 
   <script src="assets/data.js"></script>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <!-- Leaflet 1.9.4，與 unpkg 發布檔 byte 相同（sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=）。 -->
+  <script src="assets/vendor/leaflet/leaflet.js"></script>
   <script src="assets/app.js"></script>
 </body>
 </html>
