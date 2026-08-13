@@ -7,9 +7,17 @@
 - index.html：完整互動式研究網站，可直接由 GitHub Pages 部署。
 - assets/data.js：由三份已審查 CSV 產生的靜態資料包。
 - assets/app.js：省級搜尋／篩選／比較、韌性時間尺度切換及公開脈絡互動。
+- assets/vendor/leaflet/：Leaflet 1.9.4 的本地副本，與 unpkg 發布檔 byte 相同（leaflet.js 的 SRI 為 sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=）。網站不再從 CDN 載入程式碼，只有 OSM 圖磚與 Google Fonts 需要網路。
+- assets/og-image.png：社群分享縮圖，由 figures/gen_og_image.py 產生。
 - scripts/build_web_data.py：重新產生網站資料包；CSV 更新後執行 python3 scripts/build_web_data.py。
 
 本機可直接開啟 index.html，或在工作區執行 python3 -m http.server 8000 後瀏覽 http://localhost:8000。
+
+### 韌性比較圖的配對規則
+
+網站以 `dependency_assessment.csv` 的 `domain` 欄位配對中國與臺灣兩側，不使用列順序。兩側都有同名 domain 才畫成並列對照；只有單邊存在的 domain 會標示「僅有中國資料」或「僅有臺灣資料」，另一側畫成斜線底，並在圖表下方列出原因。
+
+目前金融領域屬於後者：中國側記錄的是「金融與地方債」，臺灣側記錄的是「金融與支付」。兩者衡量的不是同一件事，因此不合併成同一條對照。
 
 ## 主要成果
 
@@ -29,6 +37,7 @@
 - `figures/gen_figures.py`：檢查 SVG 與輸出 PNG 預覽的可重現腳本。
 - `figures/gen_osm_world_map.py`：依 OSMF 使用規範取得低縮放世界底圖、保留七日快取並重建圖 1。需使用工作區所附的 Pillow 環境。
 - `figures/gen_china_atlases.py`：依相同 OSMF 規範重建省級與戰區級地圖。
+- `figures/gen_og_image.py`：重建社群分享縮圖 `assets/og-image.png`。腳本會先驗證字型是否涵蓋所需的繁體字，缺字時直接報錯而不是靜默漏字。
 
 ## 使用原則
 
@@ -37,3 +46,14 @@
 資料檢索截止日：2026-08-13（Asia/Taipei）。
 
 地圖底圖：© OpenStreetMap contributors，資料採 [ODbL](https://www.openstreetmap.org/copyright)；各地圖內亦保留可見署名。
+
+## 授權
+
+本專案分兩部分授權：
+
+- 程式碼（`assets/app.js`、`assets/styles.css`、`scripts/`、`figures/*.py`）採 MIT，見 [LICENSE](LICENSE)。
+- 研究內容與資料（`report/`、`research_notes/`、`data/`、`figures/` 的 SVG 與 PNG、`README.md`、`RESPONSIBLE_USE.md`）採 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)，見 [LICENSE-CONTENT](LICENSE-CONTENT)。
+- OpenStreetMap 圖磚與底圖幾何為 © OpenStreetMap contributors，採 ODbL，不在 CC BY 4.0 範圍內。重用含 OSM 底圖的圖表時請保留可見署名。
+- `assets/vendor/leaflet/` 為 Leaflet 1.9.4，採 BSD 2-Clause，授權條款隨附於該目錄。
+
+引用時請一併保留資料檢索截止日，因為各項評估都繫於該日期取得的來源。

@@ -155,7 +155,8 @@ img:not(.leaflet-tile) { max-width: 100%; }
   background-size: 6vw 6vw;
   mask-image: linear-gradient(to right, #000, transparent 84%);
 }
-.hero-copy { position: relative; z-index: 1; max-width: 920px; }
+/* min-width:0 讓 grid 欄位可以縮到比 h1 的 min-content 更窄，避免窄螢幕把標題與內文推出容器。 */
+.hero-copy { position: relative; z-index: 1; min-width: 0; max-width: 920px; }
 .kicker {
   display: flex;
   align-items: center;
@@ -568,13 +569,27 @@ img:not(.leaflet-tile) { max-width: 100%; }
   text-align: left;
 }
 .domain-row:hover, .domain-row.active { background: rgba(255,255,255,.07); }
+.domain-row.unpaired { opacity: .82; }
 .domain-name { font-size: 12px; }
+.domain-name small { display: block; margin-top: 4px; color: rgba(255,255,255,.5); font-size: 9px; letter-spacing: .04em; }
 .bar-pair { display: grid; gap: 5px; }
 .bar-track { height: 7px; background: rgba(255,255,255,.09); }
+/* 沒有對應資料的一側畫成斜線底，跟「數值為零」在視覺上區分開。 */
+.bar-track.empty {
+  background: repeating-linear-gradient(-45deg, rgba(255,255,255,.16) 0 2px, transparent 2px 6px);
+}
 .bar { height: 100%; width: 0; transition: width .65s cubic-bezier(.2,.8,.2,1); }
 .bar.china { background: var(--cyan); }
 .bar.taiwan { background: var(--red); }
 .domain-values { font-size: 9px; color: rgba(255,255,255,.58); }
+.chart-note {
+  margin: 26px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,.16);
+  color: rgba(255,255,255,.6);
+  font-size: 11px;
+  line-height: 1.7;
+}
 .chart-insight { padding: 40px 30px; border-left: 1px solid rgba(255,255,255,.22); background: rgba(0,0,0,.12); }
 .insight-label { margin: 0; color: var(--cyan); font-size: 9px; font-weight: 700; letter-spacing: .15em; }
 .chart-insight h3 { margin: 10px 0 18px; font-family: var(--serif); font-size: 26px; }
@@ -583,6 +598,8 @@ img:not(.leaflet-tile) { max-width: 100%; }
 .insight-side strong { display: block; color: white; font-size: 12px; }
 .insight-side span { color: var(--red); font-size: 11px; font-weight: 700; }
 .insight-side.china span { color: var(--cyan); }
+.insight-side.empty span { color: rgba(255,255,255,.5); }
+.insight-side.empty p { color: rgba(255,255,255,.5); }
 
 .context-section { background: #e7e0d1; }
 .context-warning {
@@ -659,7 +676,7 @@ footer p { margin: 0; color: rgba(255,255,255,.6); font-size: 11px; }
 @media (max-width: 900px) {
   .masthead { grid-template-columns: 1fr auto; }
   .masthead nav { display: none; }
-  .hero { grid-template-columns: 1fr; align-items: center; }
+  .hero { grid-template-columns: minmax(0, 1fr); align-items: center; }
   .hero-metrics { max-width: 540px; }
   .section-heading { grid-template-columns: 1fr; gap: 20px; }
   .atlas-shell { grid-template-columns: 1fr; }
@@ -685,7 +702,8 @@ footer p { margin: 0; color: rgba(255,255,255,.6); font-size: 11px; }
   .brand-name { display: none; }
   .hero { min-height: calc(100svh - 91px); padding: 65px 20px 55px; background: var(--paper); }
   .hero::after, .scroll-cue { display: none; }
-  .hero h1 { font-size: clamp(57px, 20vw, 92px); }
+  /* 16.5vw 讓最長的 THROUGH 在 320px 到 430px 的手機寬度都放得進左右 padding。 */
+  .hero h1 { font-size: clamp(44px, 16.5vw, 92px); }
   .hero h1 em { margin-left: 15px; }
   .hero-zh { margin-top: 34px; }
   .hero-metrics { grid-template-columns: repeat(4, 1fr); }

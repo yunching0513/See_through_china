@@ -1,0 +1,47 @@
+# Licence for research content and data
+
+Copyright (c) 2026 Y.C. Wu
+
+The research content and data in this repository are licensed under the
+Creative Commons Attribution 4.0 International Licence (CC BY 4.0).
+
+To view a copy of this licence, visit:
+https://creativecommons.org/licenses/by/4.0/
+
+## What this covers
+
+  README.md
+  RESPONSIBLE_USE.md
+  report/
+  research_notes/
+  data/
+  figures/            (the .svg and .png outputs; the .py generators are MIT)
+  assets/data.js      (a build artefact of data/)
+
+Source code is licensed separately under the MIT Licence. See LICENSE.
+
+## How to attribute
+
+Suggested attribution string:
+
+  See Through China: 臺海衝突下的戰略依賴與國家韌性研究 (Y.C. Wu, 2026),
+  CC BY 4.0, https://github.com/yunching0513/See_through_china
+
+Please keep the data cut-off date with any figure or table you reuse, because
+the assessments are tied to sources retrieved on that date.
+
+## OpenStreetMap data
+
+Map tiles and basemap geometry come from OpenStreetMap. That material is
+© OpenStreetMap contributors and is licensed under the Open Database Licence
+(ODbL), not CC BY 4.0. See https://www.openstreetmap.org/copyright
+
+CC BY 4.0 does not extend to the OpenStreetMap layers. If you reuse a figure
+that contains an OSM basemap, keep the visible OSM attribution.
+
+## Responsible use
+
+This licence grants permission to reuse the material. It does not change the
+scope stated in RESPONSIBLE_USE.md. The datasets are aggregated to a level
+suitable for public policy analysis and must not be presented as targeting,
+deployment, or real-time intelligence products.
