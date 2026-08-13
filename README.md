@@ -2,6 +2,15 @@
 
 本工作區收錄一份以公開資料為基礎的初版政策研究。經濟資料可細分至省級行政區，但不細分至設施；軍事資訊僅到戰區級責任方向且與基礎設施分圖呈現。不包含設施座標、部隊部署、武力打擊點、攻擊排序、癱瘓方法或損害最佳化。
 
+## 互動網站
+
+- index.html：完整互動式研究網站，可直接由 GitHub Pages 部署。
+- assets/data.js：由三份已審查 CSV 產生的靜態資料包。
+- assets/app.js：省級搜尋／篩選／比較、韌性時間尺度切換及公開脈絡互動。
+- scripts/build_web_data.py：重新產生網站資料包；CSV 更新後執行 python3 scripts/build_web_data.py。
+
+本機可直接開啟 index.html，或在工作區執行 python3 -m http.server 8000 後瀏覽 http://localhost:8000。
+
 ## 主要成果
 
 - `report/台海衝突_戰略依賴與國家韌性_研究底稿_v1.md`：完整研究底稿。
