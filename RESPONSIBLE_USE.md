@@ -4,6 +4,8 @@ This repository is a public-source, non-operational research atlas for civil def
 
 It intentionally excludes precise infrastructure locations, unit or base deployments, targeting recommendations, attack sequencing, disablement methods, and damage optimisation. Provincial economic markers and theatre-level context must not be interpreted as military targets or real-time intelligence.
 
+External military maps may be represented only as non-geographic source-coverage summaries. Individual names, descriptions, coordinates, geometries, imagery, and operational attributes are not imported or redistributed, and external military records must not be overlaid with the provincial economic atlas.
+
 When extending the project, keep economic and military context in separate layers; aggregate sensitive material to a level suitable for public policy analysis; document dates and sources; and preserve visible OpenStreetMap attribution wherever its data or tiles are used.
 
 See `README.md` and the research notes for the full scope and methodology.

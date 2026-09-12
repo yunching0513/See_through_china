@@ -47,10 +47,11 @@ def main() -> int:
         province.update(lon=lon, lat=lat, color=ROLE_COLORS[province["role_group"]])
 
     payload = {
-        "updated": "2026-08-13",
+        "updated": "2026-09-12",
         "provinces": provinces,
         "dependencies": read_csv("dependency_assessment.csv"),
         "theaters": read_csv("china_coastal_theater_context.csv"),
+        "sourceCoverage": read_csv("external_map_coverage_summary.csv"),
         "roleColors": ROLE_COLORS,
     }
     encoded = json.dumps(payload, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")

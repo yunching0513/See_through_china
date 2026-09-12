@@ -20,6 +20,7 @@
 - `data/dependency_assessment.csv`：國家層級的系統依賴比較資料。
 - `data/china_provincial_supply_chain_atlas.csv`：中國大陸 31 個省級行政區的經濟功能、代表產品與供應鏈關聯。
 - `data/china_coastal_theater_context.csv`：北部、東部、南部戰區層級的沿海責任方向與公開活動型態；不是部署資料。
+- `data/external_map_coverage_summary.csv`：外部公開軍事地圖的分類與紀錄數摘要；不含個別標記、名稱或座標。
 - `figures/fig_1_dependency_flow.svg`：以 OpenStreetMap 世界底圖呈現的宏觀依賴流向圖。
 - `figures/fig_2_time_horizons.svg`：短、中、長期壓力機制圖。
 - `figures/fig_3_ukraine_translation.svg`：烏克蘭經驗轉譯至臺灣的韌性架構。
@@ -29,11 +30,12 @@
 - `figures/gen_figures.py`：檢查 SVG 與輸出 PNG 預覽的可重現腳本。
 - `figures/gen_osm_world_map.py`：依 OSMF 使用規範取得低縮放世界底圖、保留七日快取並重建圖 1。需使用工作區所附的 Pillow 環境。
 - `figures/gen_china_atlases.py`：依相同 OSMF 規範重建省級與戰區級地圖。
+- `research_notes/external_google_map_review.md`：外部 Google My Maps 的納入邊界、彙整方式與品質限制。
 
 ## 使用原則
 
 本研究旨在支援民防、公共政策、供應鏈與關鍵服務持續運作。圖中的「暴露」指外部中斷、制裁、封鎖風險或市場衝擊下的系統壓力，不代表軍事目標價值。
 
-資料檢索截止日：2026-08-13（Asia/Taipei）。
+核心研究資料檢索截止日：2026-08-13；外部 Google My Maps 覆蓋摘要審查日：2026-09-12（Asia/Taipei）。
 
 地圖底圖：© OpenStreetMap contributors，資料採 [ODbL](https://www.openstreetmap.org/copyright)；各地圖內亦保留可見署名。

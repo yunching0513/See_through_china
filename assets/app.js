@@ -338,11 +338,26 @@
     ).join("");
   }
 
+  function renderSourceCoverage() {
+    const coverage = data.sourceCoverage || [];
+    const maximum = Math.max(...coverage.map((row) => Number(row.record_count)), 1);
+    $("#source-coverage-chart").innerHTML = coverage.map((row) => {
+      const count = Number(row.record_count);
+      const width = Math.max(4, count / maximum * 100);
+      return '<div class="coverage-row" title="' + escapeHTML(row.interpretation_note) + '">' +
+        '<div class="coverage-label"><span>' + escapeHTML(row.category) + '</span><strong>' +
+        count.toLocaleString("zh-TW") + '</strong></div>' +
+        '<div class="coverage-track"><span style="width:' + width + '%"></span></div>' +
+        '<small>' + escapeHTML(row.source_layer_count) + ' 個原圖層</small></div>';
+    }).join("");
+  }
+
   renderRoleFilters();
   renderProvinceDirectory();
   initMap();
   initFilters();
   initResilience();
   renderTheaters();
+  renderSourceCoverage();
   applyFilters();
 })();
