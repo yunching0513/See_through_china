@@ -80,7 +80,8 @@
       role, data.provinces.filter((province) => province.role_group === role).length
     ]));
     $("#role-filters").innerHTML = [
-      '<button type="button" class="role-filter active" data-role="全部" style="--role-color:#172640"><span>全部角色</span><small>31</small></button>',
+      '<button type="button" class="role-filter active" data-role="全部" style="--role-color:#172640">' +
+      "<span>全部角色</span><small>" + data.provinces.length + "</small></button>",
       ...roles.map((role) =>
         '<button type="button" class="role-filter" data-role="' + escapeHTML(role) + '" style="--role-color:' + data.roleColors[role] + '">' +
         "<span>" + escapeHTML(role) + "</span><small>" + counts[role] + "</small></button>"
@@ -133,8 +134,8 @@
     $$(".province-item").forEach((button) => {
       button.classList.toggle("filtered-out", !visibleNames.has(button.dataset.province));
     });
-    $("#result-count").textContent = visible.length + " / 31";
-    $("#map-status").textContent = visible.length === 31
+    $("#result-count").textContent = visible.length + " / " + data.provinces.length;
+    $("#map-status").textContent = visible.length === data.provinces.length
       ? "顯示全部省級行政區"
       : "目前顯示 " + visible.length + " 個結果";
   }
@@ -263,34 +264,70 @@
     });
   }
 
-  const levelScore = { "低": 1, "低中": 1.5, "中": 2.25, "中高": 3.25, "高": 4.1, "極高": 5 };
+  const LEVEL_SCORES = { "低": 1, "低中": 1.5, "中": 2.25, "中高": 3.25, "高": 4.1, "極高": 5 };
+  const LEVEL_MAX = 5;
+  const SIDES = { china: "中國", taiwan: "臺灣" };
   let horizon = "acute_0_30d";
-  const comparisonDomains = [
-    "能源與燃料", "糧食與飼料", "外貿與製造需求", "金融系統",
-    "先進科技投入", "海運與跨境物流", "數位與跨境資料"
-  ];
-  let activeDomain = comparisonDomains[0];
+  let activeDomain = null;
 
+  function levelWidth(level) {
+    const score = LEVEL_SCORES[level];
+    if (score === undefined) {
+      console.warn("dependency_assessment 出現未定義的等級標記：" + level);
+      return 0;
+    }
+    return score / LEVEL_MAX * 100;
+  }
+
+  // 以 domain 欄位配對兩側資料。不使用列順序，避免 CSV 重排或新增列時靜默錯位。
+  // 只有單邊存在的 domain 不並列成對照，改以單邊列呈現。
   function groupedDependencies() {
-    const chinaRows = data.dependencies.filter((row) => row.side === "中國");
-    const taiwanRows = data.dependencies.filter((row) => row.side === "臺灣");
-    return comparisonDomains.map((domain, index) => ({
+    const bySide = new Map(Object.values(SIDES).map((side) => [side, new Map()]));
+    data.dependencies.forEach((row) => {
+      const sideRows = bySide.get(row.side);
+      if (!sideRows) {
+        console.warn("dependency_assessment 出現未定義的 side：" + row.side);
+        return;
+      }
+      sideRows.set(row.domain, row);
+    });
+    const entries = [...new Set(data.dependencies.map((row) => row.domain))].map((domain) => ({
       domain,
-      china: chinaRows[index],
-      taiwan: taiwanRows[index]
+      china: bySide.get(SIDES.china).get(domain) ?? null,
+      taiwan: bySide.get(SIDES.taiwan).get(domain) ?? null
     }));
+    return [
+      ...entries.filter((entry) => entry.china && entry.taiwan),
+      ...entries.filter((entry) => !entry.china || !entry.taiwan)
+    ];
   }
 
   function renderResilienceChart() {
-    $("#resilience-chart").innerHTML = groupedDependencies().map(({ domain, china, taiwan }) => {
-      const chinaValue = china[horizon];
-      const taiwanValue = taiwan[horizon];
-      return '<button class="domain-row ' + (domain === activeDomain ? "active" : "") + '" type="button" data-domain="' + escapeHTML(domain) + '">' +
-        '<span class="domain-name">' + escapeHTML(domain) + '</span><span class="bar-pair">' +
-        '<span class="bar-track"><span class="bar china" style="width:' + (levelScore[chinaValue] / 5 * 100) + '%"></span></span>' +
-        '<span class="bar-track"><span class="bar taiwan" style="width:' + (levelScore[taiwanValue] / 5 * 100) + '%"></span></span></span>' +
-        '<span class="domain-values">' + escapeHTML(chinaValue) + " / " + escapeHTML(taiwanValue) + "</span></button>";
+    const entries = groupedDependencies();
+    const bar = (row, side) => row
+      ? '<span class="bar-track"><span class="bar ' + side + '" style="width:' + levelWidth(row[horizon]) + '%"></span></span>'
+      : '<span class="bar-track empty"></span>';
+
+    $("#resilience-chart").innerHTML = entries.map(({ domain, china, taiwan }) => {
+      const paired = Boolean(china && taiwan);
+      const onlySide = china ? SIDES.china : SIDES.taiwan;
+      return '<button class="domain-row' + (domain === activeDomain ? " active" : "") +
+        (paired ? "" : " unpaired") + '" type="button" data-domain="' + escapeHTML(domain) + '"' +
+        ' aria-pressed="' + String(domain === activeDomain) + '">' +
+        '<span class="domain-name">' + escapeHTML(domain) +
+        (paired ? "" : "<small>僅有" + escapeHTML(onlySide) + "資料</small>") + "</span>" +
+        '<span class="bar-pair">' + bar(china, "china") + bar(taiwan, "taiwan") + "</span>" +
+        '<span class="domain-values">' + escapeHTML(china ? china[horizon] : "—") +
+        " / " + escapeHTML(taiwan ? taiwan[horizon] : "—") + "</span></button>";
     }).join("");
+
+    const unpaired = entries.filter((entry) => !entry.china || !entry.taiwan);
+    const note = $("#chart-note");
+    note.hidden = unpaired.length === 0;
+    note.textContent = unpaired.length === 0 ? "" :
+      "最後 " + unpaired.length + " 個領域只有單邊資料：" + unpaired.map((entry) => entry.domain).join("、") +
+      "。資料集沒有另一側的同名領域，因此網站不把它們合併成同一條對照。";
+
     $$(".domain-row").forEach((button) => {
       button.addEventListener("click", () => {
         activeDomain = button.dataset.domain;
@@ -301,16 +338,23 @@
   }
 
   function renderInsight() {
-    const { china, taiwan } = groupedDependencies().find((item) => item.domain === activeDomain);
+    const entry = groupedDependencies().find((item) => item.domain === activeDomain);
+    if (!entry) return;
+    const { domain, china, taiwan } = entry;
+    const paired = Boolean(china && taiwan);
+    const sideBlock = (row, label, cls) => row
+      ? '<div class="insight-side ' + cls + '"><strong>' + escapeHTML(label) + ' <span>' + escapeHTML(row[horizon]) + "</span></strong>" +
+        "<p>" + escapeHTML(row.interpretation_note) + "</p><p><small>依據：" + escapeHTML(row.evidence_basis) + "</small></p></div>"
+      : '<div class="insight-side empty"><strong>' + escapeHTML(label) + " <span>無對應資料</span></strong>" +
+        "<p>資料集沒有這一側的同名領域。這一列只呈現單邊觀察，不能讀成兩岸對照。</p></div>";
     $("#chart-insight").innerHTML =
-      '<p class="insight-label">EVIDENCE NOTE · ' + escapeHTML(activeDomain) + "</p><h3>" + escapeHTML(activeDomain) + "</h3>" +
-      '<div class="insight-side china"><strong>中國 <span>' + escapeHTML(china[horizon]) + "</span></strong>" +
-      "<p>" + escapeHTML(china.interpretation_note) + "</p><p><small>依據：" + escapeHTML(china.evidence_basis) + "</small></p></div>" +
-      '<div class="insight-side"><strong>臺灣 <span>' + escapeHTML(taiwan[horizon]) + "</span></strong>" +
-      "<p>" + escapeHTML(taiwan.interpretation_note) + "</p><p><small>依據：" + escapeHTML(taiwan.evidence_basis) + "</small></p></div>";
+      '<p class="insight-label">EVIDENCE NOTE · ' + (paired ? "可比對領域" : "單邊領域") + "</p>" +
+      "<h3>" + escapeHTML(domain) + "</h3>" +
+      sideBlock(china, SIDES.china, "china") + sideBlock(taiwan, SIDES.taiwan, "taiwan");
   }
 
   function initResilience() {
+    activeDomain = groupedDependencies()[0]?.domain ?? null;
     $$(".horizon-switch button").forEach((button) => {
       button.addEventListener("click", () => {
         horizon = button.dataset.horizon;
@@ -352,6 +396,21 @@
     }).join("");
   }
 
+  // 首頁摘要數字一律由資料推導，避免 HTML 的靜態值與 CSV 不同步。
+  function renderSummaryMetrics() {
+    const set = (selector, value) => {
+      const node = $(selector);
+      if (node) node.textContent = String(value);
+    };
+    const distinct = (key) => new Set(data.provinces.map((province) => province[key])).size;
+    set("#metric-provinces", data.provinces.length);
+    set("#metric-roles", distinct("role_group"));
+    set("#metric-regions", distinct("nbs_region"));
+    set("#metric-domains", groupedDependencies().filter((entry) => entry.china && entry.taiwan).length);
+    set("#panel-count", data.provinces.length);
+  }
+
+  renderSummaryMetrics();
   renderRoleFilters();
   renderProvinceDirectory();
   initMap();
